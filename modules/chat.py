@@ -895,7 +895,7 @@ def generate_instruction_template_yaml(instruction_template):
     return my_yaml_output(data)
 
 
-def save_character(name, greeting, context, picture, filename):
+def save_character(name, greeting, context, picture, bg_picture, filename):
     if filename == "":
         logger.error("The filename is empty, so the character will not be saved.")
         return
@@ -904,9 +904,12 @@ def save_character(name, greeting, context, picture, filename):
     filepath = Path(f'characters/{filename}.yaml')
     save_file(filepath, data)
     path_to_img = Path(f'characters/{filename}.png')
+    path_to_bg_img = Path(f'characters/{filename}_bg.png')
     if picture is not None:
         picture.save(path_to_img)
+        picture.save(path_to_bg_img)
         logger.info(f'Saved {path_to_img}.')
+        logger.info(f'Saved {path_to_bg_img}.')
 
 
 def delete_character(name, instruct=False):
@@ -914,6 +917,7 @@ def delete_character(name, instruct=False):
         delete_file(Path(f'characters/{name}.{extension}'))
 
     delete_file(Path(f'characters/{name}.png'))
+    delete_file(Path(f'characters/{name}_bg.png'))
 
 
 def jinja_template_from_old_format(params, verbose=False):

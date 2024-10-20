@@ -50,8 +50,6 @@ def delete_file(fname):
     if rel_path.exists():
         rel_path.unlink()
         logger.info(f'Deleted \"{fname}\".')
-        logger.info(f'Nathans rel_path \"{root_folder}\".')
-
 
 def delete_all_logs():
     root_folder = Path(__file__).resolve().parent.parent
