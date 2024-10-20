@@ -28,7 +28,7 @@ from modules.text_generation import (
     get_encoded_length,
     get_max_prompt_length
 )
-from modules.utils import delete_file, get_available_characters, save_file
+from modules.utils import delete_file, delete_all_logs, get_available_characters, save_file
 
 # Copied from the Transformers library
 jinja_env = ImmutableSandboxedEnvironment(trim_blocks=True, lstrip_blocks=True)
@@ -1118,12 +1118,11 @@ def handle_upload_chat_history(load_chat_history, state):
 
 
 def handle_character_menu_change(state):
-    name1, name2, picture, background_picture, greeting, context = load_character(state['character_menu'], state['name1'], state['name2'])
+    name1, name2, picture, greeting, context = load_character(state['character_menu'], state['name1'], state['name2'])
 
     state['name1'] = name1
     state['name2'] = name2
     state['character_picture'] = picture
-    state['character_background_picture'] = background_picture
     state['greeting'] = greeting
     state['context'] = context
 
@@ -1139,7 +1138,6 @@ def handle_character_menu_change(state):
         name1,
         name2,
         picture,
-        background_picture,
         greeting,
         context,
         gr.update(choices=histories, value=histories[0][1]),

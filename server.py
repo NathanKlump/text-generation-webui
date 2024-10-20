@@ -59,11 +59,12 @@ from modules.models_settings import (
     update_model_parameters
 )
 from modules.shared import do_cmd_flags_warnings
-from modules.utils import gradio
+from modules.utils import gradio, delete_all_logs
 
 
 def signal_handler(sig, frame):
     logger.info("Received Ctrl+C. Shutting down Text generation web UI gracefully.")
+    delete_all_logs()
     sys.exit(0)
 
 

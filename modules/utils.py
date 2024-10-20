@@ -50,6 +50,29 @@ def delete_file(fname):
     if rel_path.exists():
         rel_path.unlink()
         logger.info(f'Deleted \"{fname}\".')
+        logger.info(f'Nathans rel_path \"{root_folder}\".')
+
+
+def delete_all_logs():
+    root_folder = Path(__file__).resolve().parent.parent
+    log_directory = Path(f'{root_folder}/logs/chat')
+    
+    if not log_directory.exists():
+        logger.info(f"The directory {log_directory} does not exist.")
+        return
+
+    for character_dir in log_directory.iterdir():
+        if character_dir.is_dir():
+            for log_file in character_dir.glob('*'):
+                try:
+                    if log_file.is_file():
+                        log_file.unlink()  # Deletes the file
+                        logger.info(f"Deleted log file: {log_file}")
+                except Exception as e:
+                    logger.info(f"Error deleting {log_file}: {e}")
+        else:
+            logger.info(f"Skipping non-directory item: {character_dir}")
+    logger.info("All log files have been deleted.")
 
 
 def current_time():
