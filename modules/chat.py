@@ -722,6 +722,23 @@ def generate_pfp_cache(character):
 
     return None
 
+def generate_bgp_cache(character):
+    cache_folder = Path(shared.args.disk_cache_dir)
+    if not cache_folder.exists():
+        cache_folder.mkdir()
+
+    for path in [Path(f"characters/{character}_bg.{extension}") for extension in ['png', 'jpg', 'jpeg']]:
+        if path.exists():
+            original_img = Image.open(path)
+            original_img.save(Path(f'{cache_folder}/bgp_character.png'), format='PNG')
+
+            thumb_bg = make_thumbnail(original_img)
+            thumb_bg.save(Path(f'{cache_folder}/bgp_character_thumb.png'), format='PNG')
+
+            return thumb_bg
+
+    return None
+
 
 def load_character(character, name1, name2):
     context = greeting = ""
@@ -747,6 +764,7 @@ def load_character(character, name1, name2):
             path.unlink()
 
     picture = generate_pfp_cache(character)
+    bg_picture = generate_bgp_cache(character)
 
     # Finding the bot's name
     for k in ['name', 'bot', '<|bot|>', 'char_name']:
@@ -767,7 +785,7 @@ def load_character(character, name1, name2):
         greeting_field = 'char_greeting'
 
     greeting = data.get(greeting_field, greeting)
-    return name1, name2, picture, greeting, context
+    return name1, name2, picture, bg_picture, greeting, context
 
 
 def load_instruction_template(template):
@@ -1122,7 +1140,7 @@ def handle_upload_chat_history(load_chat_history, state):
 
 
 def handle_character_menu_change(state):
-    name1, name2, picture, greeting, context = load_character(state['character_menu'], state['name1'], state['name2'])
+    name1, name2, picture, bg_picture, greeting, context = load_character(state['character_menu'], state['name1'], state['name2'])
 
     state['name1'] = name1
     state['name2'] = name2
