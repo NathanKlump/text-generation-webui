@@ -648,7 +648,7 @@ def create_event_handlers():
         ),
         show_progress=False,
     ).then(
-        None, None, None, js=f"() => {{ window.updateChatColBackground(); {ui.update_big_picture_js}; updateBigPicture(); }}"
+        None, None, None, js=f"() => {{ {ui.update_background_picture_js}; updateBackgroundPicture(); {ui.update_big_picture_js}; updateBigPicture(); }}"
     )
 
     shared.gradio["mode"].change(

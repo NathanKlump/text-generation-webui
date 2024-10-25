@@ -177,14 +177,6 @@ function isElementVisibleOnScreen(element) {
   );
 }
 
-window.updateChatColBackground = function() {
-  console.log("in the update chat col")
-
-  const timestamp = new Date().getTime(); 
-  document.getElementById("chat-col").style.backgroundImage = `url('/file/cache/bgp_character.png?${timestamp}')`;
-  document.getElementById("chat-col").style.backgroundSize = "cover";
-}
-
 function getVisibleMessagesIndexes() {
   const elements = document.querySelectorAll(".message-body");
   const visibleIndexes = [];
