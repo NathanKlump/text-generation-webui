@@ -1145,6 +1145,7 @@ def handle_character_menu_change(state):
     state['name1'] = name1
     state['name2'] = name2
     state['character_picture'] = picture
+    state['character_background_picture'] = bg_picture
     state['greeting'] = greeting
     state['context'] = context
 
@@ -1160,6 +1161,7 @@ def handle_character_menu_change(state):
         name1,
         name2,
         picture,
+        bg_picture,
         greeting,
         context,
         gr.update(choices=histories, value=histories[0][1]),

@@ -642,6 +642,7 @@ def create_event_handlers():
             "name1",
             "name2",
             "character_picture",
+            "character_background_picture",
             "greeting",
             "context",
             "unique_id",
