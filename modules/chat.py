@@ -763,6 +763,10 @@ def load_character(character, name1, name2):
         if path.exists():
             path.unlink()
 
+    for path in [Path(f"{cache_folder}/bgp_character.png"), Path(f"{cache_folder}/bgp_character_thumb.png")]:
+        if path.exists():
+            path.unlink()
+
     picture = generate_pfp_cache(character)
     bg_picture = generate_bgp_cache(character)
 
