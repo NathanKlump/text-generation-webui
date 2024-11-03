@@ -927,10 +927,13 @@ def save_character(name, greeting, context, picture, bg_picture, filename):
     save_file(filepath, data)
     path_to_img = Path(f'characters/{filename}.png')
     path_to_bg_img = Path(f'characters/{filename}_bg.png')
+
     if picture is not None:
         picture.save(path_to_img)
-        picture.save(path_to_bg_img)
         logger.info(f'Saved {path_to_img}.')
+        
+    if bg_picture is not None:
+        bg_picture.save(path_to_bg_img)
         logger.info(f'Saved {path_to_bg_img}.')
 
 
